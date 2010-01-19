@@ -21,10 +21,34 @@ var sys = require('sys');
 //  promise.emitError("I don't like your type [" + remoteHost +"]");
 //});
 
-server.addListener( 'ehlo', function( args ) {
-  sys.puts( 'ehlo callback' );
-  var hostname = args[0];
+//server.addListener( 'ehlo', function( args ) {
+//  sys.puts( 'ehlo callback' );
+//  var hostname = args[0];
+//  var promise = args[1];
+//  // no 'true' passed as final parameter, won't close the connection
+//  promise.emitError("What kind of hostname is '" + hostname + "' anyway?");
+//});
+
+server.addListener( 'recipient', function( args ) {
+  sys.puts( 'recipient callback' );
+  var recipient = args[0];
+  var promise   = args[1];
+
+  if( recipient == 'kenneth.kalmer@gmail.com' ) {
+    promise.emitSuccess();
+  } else {
+    promise.emitError( "No such user here", true );
+  }
+});
+
+server.addListener( 'sender', function( args ) {
+  sys.puts( 'sender callback' );
+  var sender = args[0];
   var promise = args[1];
-  // no 'true' passed as final parameter, won't close the connection
-  promise.emitError("What kind of hostname is '" + hostname + "' anyway?");
+
+  if( sender == 'kenneth.kalmer@gmail.com' ) {
+    promise.emitSuccess();
+  } else {
+    promise.emitError( "You're not welcome here", true );
+  }
 });
