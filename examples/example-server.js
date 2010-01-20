@@ -14,21 +14,26 @@ var server = new smtp.Server();
 server.runServer();
 
 var sys = require('sys');
-//server.addListener('connect', function( args ) {
-//  var remoteHost = args[0];
-//  var promise = args[1];
-//  sys.puts( 'connect callback' );
-//  promise.emitError("I don't like your type [" + remoteHost +"]");
-//});
+/*
+server.addListener('connect', function( args ) {
+  var remoteHost = args[0];
+  var promise = args[1];
+  sys.puts( 'connect callback' );
+  promise.emitError("I don't like your type [" + remoteHost +"]");
+});
+*/
 
-//server.addListener( 'ehlo', function( args ) {
-//  sys.puts( 'ehlo callback' );
-//  var hostname = args[0];
-//  var promise = args[1];
-//  // no 'true' passed as final parameter, won't close the connection
-//  promise.emitError("What kind of hostname is '" + hostname + "' anyway?");
-//});
+/*
+server.addListener( 'ehlo', function( args ) {
+  sys.puts( 'ehlo callback' );
+  var hostname = args[0];
+  var promise = args[1];
+  // no 'true' passed as final parameter, won't close the connection
+  promise.emitError("What kind of hostname is '" + hostname + "' anyway?");
+});
+*/
 
+/*
 server.addListener( 'recipient', function( args ) {
   sys.puts( 'recipient callback' );
   var recipient = args[0];
@@ -40,7 +45,9 @@ server.addListener( 'recipient', function( args ) {
     promise.emitError( "No such user here", true );
   }
 });
+*/
 
+/*
 server.addListener( 'sender', function( args ) {
   sys.puts( 'sender callback' );
   var sender = args[0];
@@ -52,3 +59,20 @@ server.addListener( 'sender', function( args ) {
     promise.emitError( "You're not welcome here", true );
   }
 });
+*/
+
+/*
+server.addListener( 'data', function( args ) {
+  sys.puts( 'data callback' );
+  var data = args[0];
+  var promise = args[1];
+
+  var re = /test/ig;
+  if( re.test( data ) ) {
+    promise.emitError( "We don't accept 'test' emails round these parts" );
+  }
+  else {
+    promise.emitSuccess();
+  }
+});
+*/
